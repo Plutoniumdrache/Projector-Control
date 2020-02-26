@@ -16,6 +16,7 @@ void loop() {
 
   Serial.println("Start!");
   delay(3000);
+  clock.setStartTime();
   while(clock.expiredTime() < 3000)
   {
     Serial.println("Moin Moin");
