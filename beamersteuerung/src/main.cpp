@@ -1,13 +1,29 @@
+// bibs
 #include <Arduino.h>
 #include  "power.h"
-  timer clock;
+#include "beamerControl.h"
 
+// defines
+
+#define BAUDRATE_SERIAL_MONITOR 9600
+#define BAUDRATE_HDMI_SWITCH    19200
+#define BAUDRATE_BEAMER         9600
+
+// obejcts, variables
+power object;
+timer clock;
+beamerControl control;
+char buffer;
+char input;
+  
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
-  Serial1.begin(9600);
-}
+  Serial.begin(BAUDRATE_SERIAL_MONITOR); // Laptop Serial Monitor, internal serial connection
+  Serial1.begin(BAUDRATE_HDMI_SWITCH); // HDMI switch on Serial1
+  Serial2.begin(BAUDRATE_BEAMER); // Beamer on serial 2
+  
+} 
 
 void loop() {
   // put your main code here, to run repeatedly:
