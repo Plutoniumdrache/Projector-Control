@@ -7,18 +7,29 @@
 
 // defines
 
+// #define TESTMODE
+// #define MINIMALTEST
+
 #define BAUDRATE_SERIAL_MONITOR 9600
 #define BAUDRATE_HDMI_SWITCH    19200
 #define BAUDRATE_BEAMER         9600
 
 // obejcts, variables
-power object;
 timer clock;
-beamerControl control;
-char buffer;
-char input;
-button pushbutton1(50);
-led LED_1(40);
+beamerControl beamer;
+
+button powerButton(22);
+button sourceButton(24);
+
+led powerLED(26);
+led sourceLED(28);
+led statusLED(30);
+
+led pcLED(32);
+led wiiLED(34);
+led xboxLED(36);
+led chromecastLED(38);
+led externalInputLED(40);
   
 
 void setup() {
@@ -51,23 +62,81 @@ void loop() {
   }
   count = 1; */
 
-  
+
+
+
+  delay(2000);
+  beamer.switchBeamerOn();
+  delay(2000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #ifdef MINIMALTEST
+  // Test setup: all LEDs on, button LEDs on if button is pressed
   clock.setStartTime();
    while(true)
   {
-    if(pushbutton1.isButtonPressed())
+    if(powerButton.isButtonPressed())
       {
-        Serial.println("Taster gedrückt");
-        LED_1.switchLED_On();
+        Serial.println("ON/OFF Taste gedrückt");
+        powerLED.switchLED_On();
       } 
+    else if(sourceButton.isButtonPressed())
+      {
+        Serial.println("Source Taste gedrückt");
+        sourceLED.switchLED_On();
+      }
     else if(clock.expiredTime() > 5000)
       {
-          Serial.println("Nada");
+          Serial.println("Nix los hier");
           clock.setStartTime();
-          LED_1.switchLED_Off();
+          powerLED.switchLED_Off();
+          sourceLED.switchLED_Off();
       }
-  }
+  
+    // powerLED.switchLED_On();
+    // sourceLED.switchLED_On();
+    statusLED.switchLED_On();
+    pcLED.switchLED_On();
+    wiiLED.switchLED_On();
+    xboxLED.switchLED_On();
+    chromecastLED.switchLED_On();
+    externalInputLED.switchLED_On();
 
+    // delay(1000);
+
+    // powerLED.switchLED_Off();
+    // sourceLED.switchLED_Off();
+    // statusLED.switchLED_Off();
+    // pcLED.switchLED_Off();
+    // wiiLED.switchLED_Off();
+    // xboxLED.switchLED_Off();
+    // chromecastLED.switchLED_Off();
+    // externalInputLED.switchLED_Off();
+
+    // delay(1000);
+  }
+  #endif
+  
 
 
 }
