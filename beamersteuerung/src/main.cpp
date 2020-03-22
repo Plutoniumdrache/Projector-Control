@@ -1,6 +1,6 @@
 // bibs
 #include <Arduino.h>
-#include  "power.h"
+#include "power.h"
 #include "beamerControl.h"
 #include "button.h"
 
@@ -64,31 +64,6 @@ void loop() {
       }
   }
 
- /*  
-  unsigned long startZeit = 0;
-  unsigned long gemerkteZeit = 0;
-  unsigned long aktuelleZeit = 0;
-  unsigned long intervall = 5000;
-  while(true)
-  {
-      aktuelleZeit = millis();
-      if(aktuelleZeit - startZeit >= intervall)
-      {
-        Serial.println("Ausführung");
-        startZeit = millis();
-      }
-  } */
 
-  // clock.setStartTime();
-  // while(true)
-  // {
-  //   //delay(2000);
-  //   Serial.println(clock.expiredTime());
-  //   if(clock.expiredTime() > 6000)
-  //   {
-  //     Serial.println("Ausführung");
-  //     clock.setStartTime();
-  //   }
-  // }
 
 }
