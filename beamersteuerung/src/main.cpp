@@ -79,16 +79,16 @@ void loop() {
       }
   } */
 
-  clock.setStartTime();
-  while(true)
-  {
-    //delay(2000);
-    Serial.println(clock.expiredTime());
-    if(clock.expiredTime() > 6000)
-    {
-      Serial.println("Ausführung");
-      clock.setStartTime();
-    }
-  }
+  // clock.setStartTime();
+  // while(true)
+  // {
+  //   //delay(2000);
+  //   Serial.println(clock.expiredTime());
+  //   if(clock.expiredTime() > 6000)
+  //   {
+  //     Serial.println("Ausführung");
+  //     clock.setStartTime();
+  //   }
+  // }
 
 }
