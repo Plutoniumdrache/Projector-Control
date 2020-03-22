@@ -1,8 +1,10 @@
 class led
 {
 private:
-    /* data */
+    int pinNumber;
 public:
-    led(/* args */);
+    led(int pinNumber);
+    void switchLED_On();
+    void switchLED_Off();
     ~led();
 };
