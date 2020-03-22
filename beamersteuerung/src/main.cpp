@@ -3,6 +3,7 @@
 #include "power.h"
 #include "beamerControl.h"
 #include "button.h"
+#include "led.h"
 
 // defines
 
@@ -17,13 +18,14 @@ beamerControl control;
 char buffer;
 char input;
 button pushbutton1(50);
+led LED_1(40);
   
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(BAUDRATE_SERIAL_MONITOR); // Laptop Serial Monitor, internal serial connection
-  Serial1.begin(BAUDRATE_HDMI_SWITCH); // HDMI switch on Serial1
-  Serial2.begin(BAUDRATE_BEAMER); // Beamer on serial 2
+  Serial1.begin(BAUDRATE_HDMI_SWITCH); // HDMI switch on Serial port 1
+  Serial2.begin(BAUDRATE_BEAMER); // Beamer on Serial port 2
   
 } 
 
@@ -56,11 +58,13 @@ void loop() {
     if(pushbutton1.isButtonPressed())
       {
         Serial.println("Taster gedrückt");
+        LED_1.switchLED_On();
       } 
     else if(clock.expiredTime() > 5000)
       {
           Serial.println("Nada");
           clock.setStartTime();
+          LED_1.switchLED_Off();
       }
   }
 
