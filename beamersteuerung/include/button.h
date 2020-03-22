@@ -7,7 +7,7 @@ class button
 {
 private:
     int pinNumber = INIT;
-    bool buttonState = LOW;
+    bool buttonState = HIGH;
     bool lastButtonState = LOW;
     unsigned long debounceDelay = SHORT_DELAY;
     unsigned long lastDebounceTime = INIT;

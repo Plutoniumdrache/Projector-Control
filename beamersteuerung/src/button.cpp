@@ -28,7 +28,6 @@ bool button::isButtonPressed()
                 return true;
             }
         }
-        
     }
     lastButtonState = read;
     return false;

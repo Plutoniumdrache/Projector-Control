@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include  "power.h"
 #include "beamerControl.h"
+#include "button.h"
 
 // defines
 
@@ -15,6 +16,7 @@ timer clock;
 beamerControl control;
 char buffer;
 char input;
+button pushbutton1(50);
   
 
 void setup() {
@@ -28,7 +30,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   
-  static int count = 0;
+ /*  static int count = 0;
 
   Serial.println("Start!");
   delay(3000);
@@ -45,6 +47,48 @@ void loop() {
     count = 1;
     delay(2000);
   }
-  count = 0;
+  count = 1; */
+
   
+  clock.setStartTime();
+   while(true)
+  {
+    if(pushbutton1.isButtonPressed())
+      {
+        Serial.println("Taster gedrückt");
+      } 
+    else if(clock.expiredTime() > 5000)
+      {
+          Serial.println("Nada");
+          clock.setStartTime();
+      }
+  }
+
+ /*  
+  unsigned long startZeit = 0;
+  unsigned long gemerkteZeit = 0;
+  unsigned long aktuelleZeit = 0;
+  unsigned long intervall = 5000;
+  while(true)
+  {
+      aktuelleZeit = millis();
+      if(aktuelleZeit - startZeit >= intervall)
+      {
+        Serial.println("Ausführung");
+        startZeit = millis();
+      }
+  } */
+
+  clock.setStartTime();
+  while(true)
+  {
+    //delay(2000);
+    Serial.println(clock.expiredTime());
+    if(clock.expiredTime() > 6000)
+    {
+      Serial.println("Ausführung");
+      clock.setStartTime();
+    }
+  }
+
 }

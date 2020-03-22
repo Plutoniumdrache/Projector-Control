@@ -17,7 +17,7 @@ void timer::setStartTime() {
 */
 unsigned long timer::expiredTime() {
     currentTime = millis();
-    return (currentTime-startTime);
+    return (currentTime - startTime);
 }
 
 timer::~timer() {

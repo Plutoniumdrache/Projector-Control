@@ -21,6 +21,6 @@ unsigned long expiredTime();
 
 
 private:
-unsigned long startTime;
+unsigned long startTime = 0;
 unsigned long currentTime;
 };
