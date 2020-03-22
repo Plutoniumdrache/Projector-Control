@@ -1,9 +1,10 @@
 // bibs
 #include <Arduino.h>
-#include "power.h"
 #include "beamerControl.h"
+#include "switchControl.h"
 #include "button.h"
 #include "led.h"
+#include "timer.h"
 
 // defines
 
@@ -61,6 +62,18 @@ void loop() {
     delay(2000);
   }
   count = 1; */
+
+
+
+  
+
+
+
+
+
+
+
+
 
 
   #ifdef MINIMALTEST
