@@ -34,7 +34,7 @@ led externalInputLED(40);
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(BAUDRATE_SERIAL_MONITOR); // Laptop Serial Monitor, internal serial connection
+  Serial.begin(BAUDRATE_SERIAL_MONITOR); // USB Serial Monitor, internal serial connection
   Serial1.begin(BAUDRATE_HDMI_SWITCH); // HDMI switch on Serial port 1
   Serial2.begin(BAUDRATE_BEAMER); // Beamer on Serial port 2
   
@@ -61,33 +61,6 @@ void loop() {
     delay(2000);
   }
   count = 1; */
-
-
-
-
-  delay(2000);
-  beamer.switchBeamerOn();
-  delay(2000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   #ifdef MINIMALTEST

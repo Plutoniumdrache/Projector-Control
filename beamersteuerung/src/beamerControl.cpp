@@ -30,26 +30,26 @@ void beamerControl::switchBeamerOff()
     #endif
 }
 
-void beamerControl::switchToHDMI1()
+void beamerControl::switchToHDMIswitch()
 {
     #ifdef TESTMODE
-        Serial.println(HDMI1);
+        Serial.println(PORT_HDMI_SWITCH);
     #endif
 
     #ifdef DEFAULTMODE
-        Serial2.println(HDMI1);
+        Serial2.println(PORT_HDMI_SWITCH);
     #endif
 
 }
 
-void beamerControl::switchToHDMI2()
+void beamerControl::switchToChromecast()
 {
     #ifdef TESTMODE
-        Serial.println(HDMI2);
+        Serial.println(PORT_CHROMECAST);
     #endif
 
     #ifdef DEFAULTMODE
-        Serial2.println(HDMI2);
+        Serial2.println(PORT_CHROMECAST);
     #endif
 
 }
