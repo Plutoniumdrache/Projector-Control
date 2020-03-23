@@ -4,7 +4,6 @@
 #include "switchControl.h"
 #include "button.h"
 #include "led.h"
-#include "timer.h"
 
 // defines
 
@@ -17,6 +16,7 @@
 
 // obejcts, variables
 timer clock;
+timer clock2;
 beamerControl beamer;
 
 button powerButton(22);
@@ -62,19 +62,6 @@ void loop() {
     delay(2000);
   }
   count = 1; */
-
- // Moin mOIn 
-
-  
-
-
-
-
-
-
-
-
-
 
   #ifdef MINIMALTEST
   // Test setup: all LEDs on, button LEDs on if button is pressed
@@ -123,7 +110,32 @@ void loop() {
   }
   #endif
   
-  
+
+  // int ledStat = LOW;
+
+  // // Timerfunktion probieren
+  // while(true)
+  // {
+  //   if(clock.isTimeExpired(10000))
+  //   {
+  //     if(ledStat)
+  //     {
+  //       sourceLED.switchLED_Off();
+  //       ledStat = LOW;
+  //     } else if (!ledStat)
+  //     {
+  //       sourceLED.switchLED_On();
+  //       ledStat = HIGH;
+  //     }
+  //   }
+  //   // else if(clock2.isTimeExpired(500))
+  //   // {
+  //   //   sourceLED.switchLED_Off();
+  //   // }
+  // }
+
+  sourceLED.blinkLED(5000, 500, false);
+  delay(4000);
 
 
 }
