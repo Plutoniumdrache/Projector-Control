@@ -20,20 +20,29 @@ unsigned long timer::expiredTime() {
     return (currentTime - startTime);
 }
 
+/* 
+* Die Methode gibt zuruück ob die angebene Zeit in Millisekunden 
+* abgelaufen ist.
+* Rückgabewert:
+* - true: Zeit ist abgelaufen
+* - false: Zeit ist nicht abgelaufen 
+*/
 bool timer::isTimeExpired(unsigned long milliseconds) {
+    // entry marker, da die Startzeit gemerkt werden muss
     if(entry)
     {
         tTime = millis();
         entry = false;
     }
     unsigned long actualTime = millis();
+    // Berechnung der bereits vergangenen Zeit:
     if( (actualTime - tTime) >= milliseconds)
     {
-        entry = true;
-        return EXPIRED;
+        entry = true; // entry marker für das setzen der Startzeit zurücksetzen
+        return EXPIRED; // Zeit abgelaufen
     } else
     {
-        return NOT_EXPIRED;
+        return NOT_EXPIRED; // Zeit nicht abgelaufen
     }
 }
 
