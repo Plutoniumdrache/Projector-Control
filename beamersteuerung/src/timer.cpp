@@ -20,6 +20,23 @@ unsigned long timer::expiredTime() {
     return (currentTime - startTime);
 }
 
+bool timer::isTimeExpired(unsigned long milliseconds) {
+    if(entry)
+    {
+        tTime = millis();
+        entry = false;
+    }
+    unsigned long actualTime = millis();
+    if( (actualTime - tTime) >= milliseconds)
+    {
+        entry = true;
+        return EXPIRED;
+    } else
+    {
+        return NOT_EXPIRED;
+    }
+}
+
 timer::~timer() {
 
 }

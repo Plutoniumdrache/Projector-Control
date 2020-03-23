@@ -18,9 +18,12 @@ timer();
 virtual ~timer();
 void setStartTime();
 unsigned long expiredTime();
+bool isTimeExpired(unsigned long milliseconds);
 
 
 private:
 unsigned long startTime = 0;
 unsigned long currentTime;
+unsigned long tTime = 0;
+bool entry = true;
 };
