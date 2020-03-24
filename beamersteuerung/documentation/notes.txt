@@ -28,3 +28,10 @@
   #################################################
   
   Moinsen
+
+MinimalTest HDMI Switch:
+  Serial1.println("sw +");
+  delay(2000);
+TTL/RS232 Level Shifter: 
+- Es muss rot blinken
+- Tx und Rx müssen NICHT gedreht werden (Tx -> Tx; Rx -> Rx)
