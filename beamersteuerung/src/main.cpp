@@ -141,26 +141,32 @@ void loop() {
   String readString2;
   String cmdOK = "sw + Command OK";
   char terminator = '\n';
+  bool test = true;
   while(true)
   {
-    Serial1.println("sw +");
-    Serial1.flush();
-    if (Serial1.available())
+    if(test)
     {
-      
-      readString = Serial1.readStringUntil(terminator);
-      readString2 = Serial1.readString();
-
-      readString.trim();
-      readString2.trim();
-
-      Serial.println(readString);
-      Serial.println(readString2);
-
-      if(readString.equals(readString2))
+      Serial1.println("sw +");
+      Serial1.flush();
+      Serial.println(Serial1.read());
+      if (Serial1.available())
       {
-        Serial.println("gleich (true)");
+        
+        //readString = Serial1.readStringUntil(terminator);
+        readString2 = Serial1.readString();
+
+        // readString.trim();
+        // readString2.trim();
+
+        //Serial.println(readString);
+        Serial.println(readString2);
+
+        if(readString.equals(readString2))
+        {
+          Serial.println("gleich (true)");
+        }
       }
+      //test = false;
     }
     delay(2000);
   }
