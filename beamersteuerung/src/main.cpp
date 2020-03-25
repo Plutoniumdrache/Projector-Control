@@ -135,40 +135,27 @@ void loop() {
   //   // }
   // }
 
-  //sourceLED.blinkLED(5000, 500, OFF);
-  int inByte = 0;
+
+
+
+
+
+
+
+
   String readString;
-  String readString2;
-  String cmdOK = "sw + Command OK";
-  char terminator = '\n';
   bool test = true;
   while(true)
   {
-    if(test)
+    if (test)
     {
-      Serial1.println("sw +");
+       Serial1.println("sw +");
       Serial1.flush();
-      Serial.println(Serial1.read());
-      if (Serial1.available())
-      {
-        
-        //readString = Serial1.readStringUntil(terminator);
-        readString2 = Serial1.readString();
 
-        // readString.trim();
-        // readString2.trim();
-
-        //Serial.println(readString);
-        Serial.println(readString2);
-
-        if(readString.equals(readString2))
-        {
-          Serial.println("gleich (true)");
-        }
-      }
-      //test = false;
+      readString = Serial1.readString();
+      Serial.println(readString);
     }
+    test = false;
     delay(2000);
   }
-
 }

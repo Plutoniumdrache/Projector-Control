@@ -1,0 +1,17 @@
+  // Serial connection read for input example
+  
+  String readString;
+  bool test = true;
+  while(true)
+  {
+    if (test)
+    {
+      Serial1.println("sw +");
+      Serial1.flush();
+
+      readString = Serial1.readString();
+      Serial.println(readString);
+    }
+    test = false;
+    delay(2000);
+  }
