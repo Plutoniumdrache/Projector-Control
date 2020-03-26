@@ -135,27 +135,30 @@ void loop() {
   //   // }
   // }
 
+  // String readString;
+  // bool test = true;
+  // while(true)
+  // {
+  //   if (test)
+  //   {
+  //     Serial1.println("sw +");
+  //     Serial1.flush();
 
+  //     readString = Serial1.readString();
+  //     Serial.println(readString);
+  //   }
+  //   //test = false;
+  //   delay(2000);
+  // }
 
-
-
-
-
-
-
-  String readString;
-  bool test = true;
+  switchControl switchi;
   while(true)
   {
-    if (test)
-    {
-       Serial1.println("sw +");
-      Serial1.flush();
-
-      readString = Serial1.readString();
-      Serial.println(readString);
-    }
-    test = false;
-    delay(2000);
+      switchi.switchToPC();
+      if(switchi.checkResponseCode())
+      {
+        Serial.println("fuck yes");
+      }
+      delay(6000);
   }
 }
