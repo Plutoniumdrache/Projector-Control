@@ -11,26 +11,26 @@ beamerControl::~beamerControl() {
 void beamerControl::switchBeamerOn()
 {
     #ifdef TESTMODE
-        Serial.println(BEAMER_ON);
+        Serial.println(BEAMER_CMD_ON);
     #endif
 
     #ifdef DEFAULTMODE
         // sending the beamer command to power the beamer on:
-        Serial2.println(BEAMER_ON);
+        Serial2.println(BEAMER_CMD_ON);
         // remember the sent command:
-        lastBeamerCommand = BEAMER_ON;
+        lastBeamerCommand = BEAMER_CMD_ON;
     #endif
 }
 
 void beamerControl::switchBeamerOff()
 {
     #ifdef TESTMODE
-        Serial.println(BEAMER_OFF);
+        Serial.println(BEAMER_CMD_OFF);
     #endif
 
     #ifdef DEFAULTMODE
-        Serial2.println(BEAMER_OFF);
-        lastBeamerCommand = BEAMER_OFF;
+        Serial2.println(BEAMER_CMD_OFF);
+        lastBeamerCommand = BEAMER_CMD_OFF;
     #endif
 }
 

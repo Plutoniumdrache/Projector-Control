@@ -1,44 +1,22 @@
 // bibs
 #include <Arduino.h>
-#include "beamerControl.h"
-#include "switchControl.h"
-#include "button.h"
-#include "led.h"
+#include "mediaFSM.h"
+
 
 // defines
 
 // #define TESTMODE
 // #define MINIMALTEST
 
-#define BAUDRATE_SERIAL_MONITOR 9600
-#define BAUDRATE_HDMI_SWITCH    19200
-#define BAUDRATE_BEAMER         9600
+
 
 // obejcts, variables
-timer clock;
-timer clock2;
-beamerControl beamer;
-switchControl hdmiSwitch;
 
-button powerButton(22);
-button sourceButton(24);
-
-led powerLED(26);
-led sourceLED(28);
-led statusLED(30);
-
-led pcLED(32);
-led wiiLED(34);
-led xboxLED(36);
-led chromecastLED(38);
-led externalInputLED(40);
   
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(BAUDRATE_SERIAL_MONITOR); // USB Serial Monitor, internal serial connection
-  Serial1.begin(BAUDRATE_HDMI_SWITCH); // HDMI switch on Serial port 1
-  Serial2.begin(BAUDRATE_BEAMER); // Beamer on Serial port 2
+  
   
 } 
 
@@ -161,4 +139,16 @@ void loop() {
       }
       delay(6000);
   }
+
+  //jetzt aber richtig:
+  mediaSystem* pmS = new mediaSystem;
+  mediaFSM* pff = new mediaFSM(pmS);
+  while(true)
+  {
+    pff->evalEvents();
+    pff->evalStates();
+  }
+
+
+
 }

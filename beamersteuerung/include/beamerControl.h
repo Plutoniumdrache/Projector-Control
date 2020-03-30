@@ -5,8 +5,8 @@
 
 #define NO_MESSAGE_IN_TESTMODE true
 
-#define BEAMER_ON "PWR ON"
-#define BEAMER_OFF "PWR OFF"
+#define BEAMER_CMD_ON "PWR ON"
+#define BEAMER_CMD_OFF "PWR OFF"
 #define PORT_HDMI_SWITCH "SOURCE 30" // Input: HDMI 1
 #define PORT_CHROMECAST "SOURCE A0" // Input: HDMI 2
 
