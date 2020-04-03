@@ -12,10 +12,12 @@
 
 // obejcts, variables
 
+
   
 
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
   
   
 } 
@@ -129,26 +131,25 @@ void loop() {
   //   delay(2000);
   // }
 
-  switchControl switchi;
-  while(true)
-  {
-      switchi.switchToPC();
-      if(switchi.checkResponseCode())
-      {
-        Serial.println("fuck yes");
-      }
-      delay(6000);
-  }
+  // switchControl switchi;
+  // while(true)
+  // {
+  //     switchi.switchToPC();
+  //     if(switchi.checkResponseCode())
+  //     {
+  //       Serial.println("fuck yes");
+  //     }
+  //     delay(6000);
+  // }
 
-  //jetzt aber richtig:
-  mediaSystem* pmS = new mediaSystem;
-  mediaFSM* pff = new mediaFSM(pmS);
-  while(true)
-  {
-    pff->evalEvents();
-    pff->evalStates();
-  }
-
+  // //jetzt aber richtig:
+  // mediaSystem* pmS = new mediaSystem;
+  // mediaFSM* pff = new mediaFSM(pmS);
+  // while(true)
+  // {
+  //   pff->evalEvents();
+  //   pff->evalStates();
+  // }
 
 
 }

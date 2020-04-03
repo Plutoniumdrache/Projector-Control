@@ -1,7 +1,11 @@
 #include "led.h"
 
-// choosing the pinNumber for the LED
-led::led(int pinNumber)
+led::led()
+{
+}
+
+// choosing the pinNumber of the LED
+void led::initializeLED(int pinNumber)
 {
     this->pinNumber = pinNumber;
     pinMode(pinNumber, OUTPUT); // Setting the pinMode on OUTPUT
@@ -29,15 +33,15 @@ void led::blinkLED(unsigned long duration, unsigned long intervall, bool endStat
     {
         if(LEDclock.isTimeExpired(intervall))
         {
-        if(ledStat)
-        {
-            switchLED_Off();
-            ledStat = OFF;
-        } else if (!ledStat)
-        {
-            switchLED_On();
-            ledStat = ON;
-        }
+            if(ledStat)
+            {
+                switchLED_Off();
+                ledStat = OFF;
+            } else if (!ledStat)
+            {
+                switchLED_On();
+                ledStat = ON;
+            }
         }
     }
     if (endStat)
@@ -47,8 +51,26 @@ void led::blinkLED(unsigned long duration, unsigned long intervall, bool endStat
     {
         switchLED_Off();
     }
-    
-    
+}
+
+/* Blinking the LED in a specific intervall as long as the method is called.
+    No in the programm/code. */
+void led::blinkiBlinkLED(unsigned long intervall)
+{
+
+    if (LEDclock.isTimeExpired(intervall))
+    {
+        if (ledStat)
+        {
+            switchLED_Off();
+            ledStat = OFF;
+        } else if (!ledStat)
+        {
+            switchLED_On();
+            ledStat = ON;
+        }
+    }
+
 }
 
 led::~led()

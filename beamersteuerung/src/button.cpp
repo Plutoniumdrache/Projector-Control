@@ -1,7 +1,12 @@
 #include "button.h"
 
+button::button()
+{
+
+}
+
 /* Refer to the pin which is connected to the pushbutton */
-button::button(int pinNumber)
+void button::initializeButton(int pinNumber)
 {
     this->pinNumber = pinNumber;
     pinMode(pinNumber, INPUT_PULLUP); //define as INPUT_PULLUP

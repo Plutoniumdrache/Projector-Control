@@ -14,7 +14,7 @@ void mediaFSM::evalEvents()
         state = systemState::INITIAL;
         break;
     case systemState::INITIAL:
-        if(pmS->powerButton.isButtonPressed());
+        if(pmS->powerButton.isButtonPressed()) //ACHTUNG HIER FEHLT NOCH DER POWER BUTTON
         {
             pmS->beamer.switchBeamerOn();
             state = systemState::BEAMER_ON;

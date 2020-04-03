@@ -43,6 +43,7 @@ private:
     const int pin_xBox_Led = 36;
     const int pin_Chromecast_Led = 38;
     const int pin_externalInput_Led = 40;
+    void initalizeAllObjects();
 
 public:
     mediaSystem(/* args */);
@@ -50,18 +51,18 @@ public:
     beamerControl beamer;
     switchControl hdmiSwitch;
 
-    button powerButton(const int pin_PowerButton);
-    button sourceButton(const int pin_SourceButton);
+    button powerButton;
+    button sourceButton;
 
-    led powerLED(const int pin_PowerLed);
-    led sourceLED(const int pin_SourceLed);
-    led statusLED(const int pin_StatusLed);
+    led powerLED;
+    led sourceLED;
+    led statusLED;
 
-    led pcLED(const int pin_Pc_Led);
-    led wiiLED(const int pin_Wii_Led);
-    led xboxLED(const int pin_xBox_Led);
-    led chromecastLED(const int pin_Chromecast_Led);
-    led externalInputLED(const int pin_externalInput_Led);
+    led pcLED;
+    led wiiLED;
+    led xboxLED;
+    led chromecastLED;
+    led externalInputLED;
     ~mediaSystem();
 
 };

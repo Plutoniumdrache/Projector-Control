@@ -12,7 +12,8 @@ private:
     unsigned long debounceDelay = SHORT_DELAY;
     unsigned long lastDebounceTime = INIT;
 public:
-    button(int pinNumber);
+    button();
+    void initializeButton(int pinNumber);
     ~button();
     bool isButtonPressed();
 };
