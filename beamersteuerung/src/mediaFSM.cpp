@@ -11,6 +11,7 @@ void mediaFSM::evalEvents()
     switch (state)
     {
     case systemState::IDLE:
+        pmS->hdmiSwitch.setDefaultMode();
         state = systemState::INITIAL;
         break;
     case systemState::INITIAL:
@@ -22,6 +23,17 @@ void mediaFSM::evalEvents()
         break;
     case systemState::BEAMER_ON:
         if(pmS->clock.isTimeExpired(40000) || pmS->beamer.checkResponseCode())
+        {
+            state = systemState::PRE_DEFAULT;
+        }
+        break;
+    case systemState::PRE_DEFAULT:
+        pmS->beamer.switchToHDMIswitch();
+        pmS->hdmiSwitch.switchToPC();
+        state = systemState::INPUT_PC;
+        break;
+    case systemState::INPUT_PC:
+        if(pmS->clock.isTimeExpired(10000) && pmS->sourceButton.isButtonPressed())
         {
             
         }
