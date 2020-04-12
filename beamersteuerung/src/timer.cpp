@@ -46,6 +46,12 @@ bool timer::isTimeExpired(unsigned long milliseconds) {
     }
 }
 
+/* Zurücksetzen des Timers der Methode isTimeExpired */
+void timer::resetTimer()
+{
+    entry = ACTIVATE;
+}
+
 timer::~timer() {
 
 }

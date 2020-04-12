@@ -11,6 +11,7 @@
 
 #define EXPIRED true
 #define NOT_EXPIRED false
+#define ACTIVATE true
 
 class timer {
 public:
@@ -19,6 +20,7 @@ virtual ~timer();
 void setStartTime();
 unsigned long expiredTime();
 bool isTimeExpired(unsigned long milliseconds);
+void resetTimer();
 
 
 private:
