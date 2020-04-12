@@ -142,14 +142,14 @@ void loop() {
   //     delay(6000);
   // }
 
-  // //jetzt aber richtig:
-  // mediaSystem* pmS = new mediaSystem;
-  // mediaFSM* pff = new mediaFSM(pmS);
-  // while(true)
-  // {
-  //   pff->evalEvents();
-  //   pff->evalStates();
-  // }
+  //jetzt aber richtig:
+  mediaSystem* pmS = new mediaSystem;
+  mediaFSM* pff = new mediaFSM(pmS);
+  while(true)
+  {
+    pff->evalEvents();
+    pff->evalStates();
+  }
 
 
 }

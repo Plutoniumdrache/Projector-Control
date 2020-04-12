@@ -34,17 +34,6 @@ void mediaFSM::evalEvents()
         pmS->hdmiSwitch.switchToPC();
         state = systemState::INPUT_PC;
         break;
-    case systemState::INPUT_PC:
-        if(pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
-        {
-            pmS->clock.resetTimer();
-            state = systemState::PRE_SELECT_WII;
-        } else if (pmS->powerButton.isButtonPressed())
-        {
-            pmS->beamer.switchBeamerOff();
-            state = systemState::BEAMER_OFF;
-        }        
-        break;
     case systemState::PRE_SELECT_WII:
         if (pmS->clock.isTimeExpired(HCI_TIME))
         {
@@ -54,6 +43,7 @@ void mediaFSM::evalEvents()
             state = systemState::INPUT_WII;
         } else if (pmS->sourceButton.isButtonPressed())
         {
+            pmS->clock.resetTimer();
             state = systemState::PRE_SELECT_XBOX;
         }
         break;
@@ -66,6 +56,7 @@ void mediaFSM::evalEvents()
             state = systemState::INPUT_XBOX;
         } else if (pmS->sourceButton.isButtonPressed())
         {
+            pmS->clock.resetTimer();
             state = systemState::PRE_SELECT_CAST;
         }
         break;
@@ -77,6 +68,7 @@ void mediaFSM::evalEvents()
             state = systemState::INPUT_CAST;
         } else if (pmS->sourceButton.isButtonPressed())
         {
+            pmS->clock.resetTimer();
             state = systemState::PRE_SELECT_EXTERNAL;
         }
         break;
@@ -89,6 +81,7 @@ void mediaFSM::evalEvents()
             state = systemState::INPUT_EXTERNAL;
         } else if (pmS->sourceButton.isButtonPressed())
         {
+            pmS->clock.resetTimer();
             state = systemState::PRE_SELECT_PC;
         }
         break;
@@ -101,20 +94,74 @@ void mediaFSM::evalEvents()
             state = systemState::INPUT_PC;
         } else if (pmS->sourceButton.isButtonPressed())
         {
+            pmS->clock.resetTimer();
             state = systemState::PRE_SELECT_WII;
         }
         break;
     case systemState::INPUT_WII:
         if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
         {
+            pmS->clock.resetTimer();
             state = systemState::PRE_SELECT_XBOX;
-        } else if (pmS->powerButton.isButtonPressed())
+        } else if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->powerButton.isButtonPressed())
         {
             pmS->beamer.switchBeamerOff();
+            pmS->clock.resetTimer();
             state = systemState::BEAMER_OFF;
         }
-        
-        
+        break;
+    case systemState::INPUT_XBOX:
+        if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
+        {
+            pmS->clock.resetTimer();
+            state = systemState::PRE_SELECT_CAST;
+        } else if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->powerButton.isButtonPressed())
+        {
+            pmS->beamer.switchBeamerOff();
+            pmS->clock.resetTimer();
+            state = systemState::BEAMER_OFF;
+        }
+        break;
+    case systemState::INPUT_CAST:
+        if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
+        {
+            pmS->clock.resetTimer();
+            state = systemState::PRE_SELECT_EXTERNAL;
+        } else if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->powerButton.isButtonPressed())
+        {
+            pmS->beamer.switchBeamerOff();
+            pmS->clock.resetTimer();
+            state = systemState::BEAMER_OFF;
+        }
+        break;
+    case systemState::INPUT_EXTERNAL:
+        if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
+        {
+            pmS->clock.resetTimer();
+            state = systemState::PRE_SELECT_PC;
+        } else if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->powerButton.isButtonPressed())
+        {
+            pmS->beamer.switchBeamerOff();
+            pmS->clock.resetTimer();
+            state = systemState::BEAMER_OFF;
+        }
+        break;
+    case systemState::INPUT_PC:
+        if(pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
+        {
+            pmS->clock.resetTimer();
+            state = systemState::PRE_SELECT_WII;
+        } else if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->powerButton.isButtonPressed())
+        {
+            pmS->clock.resetTimer();
+            pmS->beamer.switchBeamerOff();
+            state = systemState::BEAMER_OFF;
+        }        
+        break;
+    case systemState::BEAMER_OFF:
+        pmS->clock.resetTimer();
+        state = systemState::INITIAL;
+        break;
     default:
         break;
     }
@@ -127,48 +174,83 @@ void mediaFSM::evalStates()
     {
     case systemState::IDLE:
         // first turn everything off
-        pmS->chromecastLED.switchLED_Off();
-        pmS->externalInputLED.switchLED_Off();
         pmS->sourceLED.switchLED_Off();
         pmS->powerLED.switchLED_Off();
         pmS->statusLED.switchLED_Off();
+
+        pmS->chromecastLED.switchLED_Off();
+        pmS->externalInputLED.switchLED_Off();
         pmS->wiiLED.switchLED_Off();
         pmS->xboxLED.switchLED_Off();
         pmS->pcLED.switchLED_Off();
         break;
     case systemState::INITIAL:
         pmS->statusLED.switchLED_On();
-        pmS->powerLED.switchLED_On();
+        pmS->powerLED.switchLED_Off();
         break;
     case systemState::BEAMER_ON:
         pmS->powerLED.blinkiBlinkLED(SLOW_BLINKING);
         break;
     case systemState::PRE_DEFAULT:
-        // pmS->sourceLED.switchLED_On();
+        pmS->powerLED.switchLED_On();
+        pmS->statusLED.switchLED_Off();
+        break;
+    case systemState::PRE_SELECT_WII:
+        pmS->sourceLED.switchLED_On();
+        pmS->pcLED.switchLED_Off();
+        pmS->wiiLED.blinkiBlinkLED(FAST_BLINKING);
+        break;
+    case systemState::PRE_SELECT_XBOX:
+        pmS->sourceLED.switchLED_On();
+        pmS->wiiLED.switchLED_Off();
+        pmS->xboxLED.blinkiBlinkLED(FAST_BLINKING);
+        break;
+    case systemState::PRE_SELECT_CAST:
+        pmS->sourceLED.switchLED_On();
+        pmS->xboxLED.switchLED_Off();
+        pmS->chromecastLED.blinkiBlinkLED(FAST_BLINKING);
+        break;
+    case systemState::PRE_SELECT_EXTERNAL:
+        pmS->sourceLED.switchLED_On();
+        pmS->chromecastLED.switchLED_Off();
+        pmS->externalInputLED.blinkiBlinkLED(FAST_BLINKING);
+        break;
+    case systemState::PRE_SELECT_PC:
+        pmS->sourceLED.switchLED_On();
+        pmS->externalInputLED.switchLED_Off();
+        pmS->pcLED.blinkiBlinkLED(FAST_BLINKING);
+        break;
+    case systemState::INPUT_WII:
+        pmS->sourceLED.switchLED_Off();
+        pmS->wiiLED.switchLED_On();
+        break;
+    case systemState::INPUT_XBOX:
+        pmS->sourceLED.switchLED_Off();
+        pmS->xboxLED.switchLED_On();
+        break;
+    case systemState::INPUT_CAST:
+        pmS->sourceLED.switchLED_Off();
+        pmS->chromecastLED.switchLED_On();
+        break;
+    case systemState::INPUT_EXTERNAL:
+        pmS->sourceLED.switchLED_Off();
+        pmS->externalInputLED.switchLED_On();
         break;
     case systemState::INPUT_PC:
         pmS->pcLED.switchLED_On();
         pmS->sourceLED.switchLED_Off();
         break;
-    case systemState::PRE_SELECT_WII:
-        pmS->sourceLED.switchLED_On();
-        pmS->wiiLED.blinkiBlinkLED(FAST_BLINKING);
-        break;
-    case systemState::PRE_SELECT_XBOX:
-        pmS->sourceLED.switchLED_On();
-        pmS->xboxLED.blinkiBlinkLED(FAST_BLINKING);
-        break;
-    case systemState::PRE_SELECT_CAST:
-        pmS->sourceLED.switchLED_On();
-        pmS->chromecastLED.blinkiBlinkLED(FAST_BLINKING);
-        break;
-    case systemState::PRE_SELECT_EXTERNAL:
-        pmS->sourceLED.switchLED_On();
-        pmS->externalInputLED.blinkiBlinkLED(FAST_BLINKING);
-        break;
-    case systemState::PRE_SELECT_PC:
-        pmS->sourceLED.switchLED_On();
-        pmS->pcLED.blinkiBlinkLED(FAST_BLINKING);
+    case systemState::BEAMER_OFF:
+        pmS->powerLED.switchLED_Off();
+        pmS->sourceLED.switchLED_Off();
+
+        pmS->statusLED.switchLED_On();
+        
+        pmS->chromecastLED.switchLED_Off();
+        pmS->externalInputLED.switchLED_Off();
+        pmS->pcLED.switchLED_Off();
+        pmS->wiiLED.switchLED_Off();
+        pmS->xboxLED.switchLED_Off();
         break;
     default:
         break;
