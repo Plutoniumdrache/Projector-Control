@@ -31,7 +31,7 @@ void led::blinkLED(unsigned long duration, unsigned long intervall, bool endStat
     LEDclock.setStartTime();
     while(LEDclock.expiredTime() <= duration)
     {
-        if(LEDclock.isTimeExpired(intervall))
+        if(LEDclock.intervallTimer(intervall))
         {
             if(ledStat)
             {
@@ -58,7 +58,7 @@ void led::blinkLED(unsigned long duration, unsigned long intervall, bool endStat
 void led::blinkiBlinkLED(unsigned long intervall)
 {
 
-    if (LEDclock.isTimeExpired(intervall))
+    if (LEDclock.intervallTimer(intervall))
     {
         if (ledStat)
         {

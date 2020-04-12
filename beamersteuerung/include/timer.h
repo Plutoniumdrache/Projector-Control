@@ -21,11 +21,18 @@ void setStartTime();
 unsigned long expiredTime();
 bool isTimeExpired(unsigned long milliseconds);
 void resetTimer();
+bool intervallTimer(unsigned long intervall);
 
 
 private:
 unsigned long startTime = 0;
 unsigned long currentTime;
+
+// reset timer
 unsigned long tTime = 0;
 bool entry = true;
+
+// IntervallTimer
+bool entry_intervall = true;
+unsigned long tTime_intervall;
 };
