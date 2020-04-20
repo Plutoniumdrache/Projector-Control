@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#define TESTMODE
-//#define DEFAULTMODE
+//#define TESTMODE
+#define DEFAULTMODE
 
 #define NO_MESSAGE_IN_TESTMODE true
 
