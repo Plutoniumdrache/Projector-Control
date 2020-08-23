@@ -52,7 +52,7 @@ void timer::resetTimer()
     entry = ACTIVATE;
 }
 
-/*  liefert in Abstzänden des angebenen Zeitintervalls true, 
+/*  liefert in Abständen des angebenen Zeitintervalls true, 
     reset passiert automatisch nach Ablauf der Zeit */
 bool timer::intervallTimer(unsigned long intervall)
 {

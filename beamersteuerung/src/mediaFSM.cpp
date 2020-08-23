@@ -99,6 +99,11 @@ void mediaFSM::evalEvents()
         }
         break;
     case systemState::INPUT_WII:
+        if (pmS->clock.isTimeExpired(NO_HCI_TIME)) // SourceLED goes on, if no HCI time has passed
+        {
+            pmS->sourceLED.switchLED_On();
+        }
+
         if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
         {
             pmS->clock.resetTimer();
@@ -111,6 +116,11 @@ void mediaFSM::evalEvents()
         }
         break;
     case systemState::INPUT_XBOX:
+        if (pmS->clock.isTimeExpired(NO_HCI_TIME)) 
+        {
+            pmS->sourceLED.switchLED_On();
+        }
+
         if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
         {
             pmS->clock.resetTimer();
@@ -123,6 +133,11 @@ void mediaFSM::evalEvents()
         }
         break;
     case systemState::INPUT_CAST:
+        if (pmS->clock.isTimeExpired(NO_HCI_TIME)) 
+        {
+            pmS->sourceLED.switchLED_On();
+        }
+
         if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
         {
             pmS->clock.resetTimer();
@@ -135,6 +150,11 @@ void mediaFSM::evalEvents()
         }
         break;
     case systemState::INPUT_EXTERNAL:
+        if (pmS->clock.isTimeExpired(NO_HCI_TIME)) 
+        {
+            pmS->sourceLED.switchLED_On();
+        }
+
         if (pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
         {
             pmS->clock.resetTimer();
@@ -147,6 +167,11 @@ void mediaFSM::evalEvents()
         }
         break;
     case systemState::INPUT_PC:
+        if (pmS->clock.isTimeExpired(NO_HCI_TIME)) 
+        {
+            pmS->sourceLED.switchLED_On();
+        }
+        
         if(pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
         {
             pmS->clock.resetTimer();
@@ -186,7 +211,7 @@ void mediaFSM::evalStates()
         break;
     case systemState::INITIAL:
         pmS->statusLED.switchLED_On();
-        pmS->powerLED.switchLED_Off();
+        pmS->powerLED.switchLED_On();
         break;
     case systemState::BEAMER_ON:
         pmS->powerLED.blinkiBlinkLED(SLOW_BLINKING);
