@@ -24,7 +24,7 @@ void mediaFSM::evalEvents()
         }
         break;
     case systemState::BEAMER_ON:
-        if(pmS->clock.isTimeExpired(MAX_LAMP_IGNITION_TIME) || pmS->beamer.checkResponseCode())
+        if(pmS->clock.isTimeExpired(MAX_LAMP_IGNITION_TIME))// || pmS->beamer.checkResponseCode())
         {
             pmS->clock.resetTimer();
             state = systemState::PRE_DEFAULT;

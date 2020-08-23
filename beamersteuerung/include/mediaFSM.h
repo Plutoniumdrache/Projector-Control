@@ -1,7 +1,7 @@
 #include "mediaSystem.h"
 
 #define FAST_BLINKING 500
-#define SLOW_BLINKING 750
+#define SLOW_BLINKING 800
 #define BLINKING_PERIOD 3000
 #define COOLDOWN_PERIOD 15000
 #define MAX_LAMP_IGNITION_TIME 40000
