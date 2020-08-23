@@ -18,6 +18,7 @@ void mediaFSM::evalEvents()
     case systemState::INITIAL:
         if(pmS->powerButton.isButtonPressed())
         {
+            pmS->powerLED.switchLED_Off();
             pmS->beamer.switchBeamerOn();
             state = systemState::BEAMER_ON;
         }
@@ -171,7 +172,7 @@ void mediaFSM::evalEvents()
         {
             pmS->sourceLED.switchLED_On();
         }
-        
+
         if(pmS->clock.isTimeExpired(NO_HCI_TIME) && pmS->sourceButton.isButtonPressed())
         {
             pmS->clock.resetTimer();
@@ -184,8 +185,11 @@ void mediaFSM::evalEvents()
         }        
         break;
     case systemState::BEAMER_OFF:
-        pmS->clock.resetTimer();
-        state = systemState::INITIAL;
+        if(pmS->clock.isTimeExpired(COOLDOWN_PERIOD))
+        {
+            pmS->clock.resetTimer();
+            state = systemState::INITIAL;
+        }
         break;
     default:
         break;
@@ -269,7 +273,7 @@ void mediaFSM::evalStates()
         pmS->powerLED.switchLED_Off();
         pmS->sourceLED.switchLED_Off();
 
-        pmS->statusLED.switchLED_On();
+        pmS->statusLED.blinkiBlinkLED(SLOW_BLINKING);
         
         pmS->chromecastLED.switchLED_Off();
         pmS->externalInputLED.switchLED_Off();
